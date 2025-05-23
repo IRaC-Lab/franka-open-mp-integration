@@ -1,0 +1,4 @@
+<launch>
+    <node name="pcl_passthrough_filter" pkg="pcl_filter" type="pcl_passthrough_filter.py" output="screen"/>
+</launch>
+

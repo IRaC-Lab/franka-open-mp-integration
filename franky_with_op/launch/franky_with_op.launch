@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<launch>
+
+  <!-- Open Manipulator -->
+  <include file="$(find open_manipulator_controller)/launch/open_manipulator_controller.launch" ns="op_mani"/>
+  <include file="$(find open_manipulator_control_gui)/launch/open_manipulator_control_gui.launch" ns="op_mani"/>
+
+  <node name="init_op" pkg="franky_with_op" type="op_init_pose.py" output="screen" ns="op_mani"/>
+  <node name="opmani_to_panda_publisher" pkg="franky_with_op" type="op_EE.py" output="screen" ns="op_mani"/>
+  
+  <!-- Use Franky -->
+
+  <node name="opfranky" pkg="franky_with_op" type="opfranky.py" output="screen"/>
+
+</launch>
+
+
+
