@@ -1,6 +1,6 @@
 This package is Open Manipulator - Franka Emika Panda Teleoperation System
 
-Check List
+# Check List
 1. Connect Open Manipulator and Franka Emika Panda Robot
 
 1-1. Caution, YOU MUST CHECK Franka Emika Panda Robot Init setting -> Ubuntu RT Kernal, Panda Pose Initialize
@@ -26,13 +26,13 @@ roslaunch franka_visualization franka_visualization.launch robot_ip:=172.16.0.2 
 
 6. TF Tree Check
 
-How to RUN
+# How to RUN
 
 1. Install dependency pkg (mediapipe, op-manipulaotr-x, ...)
 
 2. Run franky_with_op.launch, pcl_filter.launch in order
 
-Caution
+# Caution
 
 The manipulator stop related files are missing. So, you would make your own node.
 
