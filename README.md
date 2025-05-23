@@ -1,4 +1,4 @@
-This package is Open Manipulator - Franka Emika Panda Teleoperation System
+This package is about franka-open-mp-integration system.
 
 # Check List
 1. Connect Open Manipulator and Franka Emika Panda Robot
@@ -7,7 +7,7 @@ This package is Open Manipulator - Franka Emika Panda Teleoperation System
 
 2. type below code in terminal
 
-roslaunch franky_with_op franky_with_op.launch
+  roslaunch franky_with_op franky_with_op.launch
 
 3. Turn off Actuator carefully (Use Op Mani control GUI)
 
