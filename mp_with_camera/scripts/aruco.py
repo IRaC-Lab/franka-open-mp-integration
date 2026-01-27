@@ -11,12 +11,12 @@ import numpy as np
 import cv2
 import mediapipe as mp
 
-# ================= ROS =================
+# ROS
 rospy.init_node('sphere_publisher', anonymous=True)
 pub = rospy.Publisher('visualization_marker', Marker, queue_size=10)
 rate = rospy.Rate(100)
 
-# ================= Marker =================
+# Marker
 human_wrist = Marker()
 human_wrist.header.frame_id = "panda_link0"
 human_wrist.ns = "sphere_namespace"
@@ -33,19 +33,19 @@ human_wrist.color.g = 1.0
 human_wrist.color.b = 0.0
 human_wrist.color.a = 1.0
 
-# ================= MediaPipe =================
+# MediaPipe
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(min_detection_confidence=0.5,
                     min_tracking_confidence=0.5)
 
-# ================= Aruco =================
+# Aruco 
 aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
 parameters = cv2.aruco.DetectorParameters()
 
 aruco_initialized = False
 T_marker_to_camera_fixed = None
 
-# ================= RealSense =================
+# RealSense
 pipeline = rs.pipeline()
 config = rs.config()
 config.enable_stream(rs.stream.depth, 1280, 720, rs.format.z16, 30)
@@ -66,7 +66,7 @@ camera_matrix = np.array([[color_intr.fx, 0, color_intr.ppx],
                           [0, 0, 1]])
 dist_coeffs = np.array(color_intr.coeffs)
 
-# ================= Robot Transform =================
+# Robot Transform
 angle = 90
 rad = np.deg2rad(angle)
 R_rotation = np.array([[1, 0, 0],
@@ -79,7 +79,7 @@ T_robot = np.eye(4)
 T_robot[:3, :3] = R_rotation
 T_robot[:3, 3] = translation_vector
 
-# ================= Vars =================
+# Vars
 idx11 = [0, 0]
 idx12 = [0, 0]
 prev_result = None
@@ -99,7 +99,7 @@ try:
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
 
-        # ================= Pose =================
+        # Pose
         results = pose.process(cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB))
 
         if results.pose_landmarks:
@@ -115,7 +115,7 @@ try:
                 if idx == 12:
                     idx12 = [x, y]
 
-        # ================= Depth =================
+        # Depth
         if not (0 <= idx11[0] < 1280 and 0 <= idx11[1] < 720 and
                 0 <= idx12[0] < 1280 and 0 <= idx12[1] < 720):
             continue
@@ -131,7 +131,7 @@ try:
                            (p11[2] + p12[2]) / 2,
                            1.0])
 
-        # ================= Aruco (1-time) =================
+        # Aruco 저장
         if not aruco_initialized:
             corners, ids, _ = cv2.aruco.detectMarkers(
                 color_image, aruco_dict, parameters=parameters)
@@ -160,7 +160,7 @@ try:
             cv2.waitKey(1)
             continue
 
-        # ================= Transform =================
+        # Transform
         K = T_robot @ (T_marker_to_camera_fixed @ center)
 
         result = K[:3]
