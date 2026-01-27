@@ -30,10 +30,12 @@ roslaunch franka_visualization franka_visualization.launch robot_ip:=172.16.0.2 
 
 1. Install dependency pkg (mediapipe, op-manipulaotr-x, ...)
 
-2. Run franky_with_op.launch, pcl_filter.launch in order
+2. roslaunch franky_with_op franky_with_op.launch
+
+3. rosrun pcl_filter arcuo.py
+
+4. rosrun pcl_filter check.py
 
 # Caution
-
-The manipulator stop related files are missing. So, you would make your own node.
 
 Adapt the code to find the normal vector to your system. Otherwise, errors will occur.
