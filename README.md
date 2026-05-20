@@ -33,7 +33,7 @@ roslaunch franka_visualization franka_visualization.launch robot_ip:=172.16.0.2 
 2. roslaunch franky_with_op franky_with_op.launch
    (leader-follower robot synchronization)
 
-4. rosrun pcl_filter arcuo.py
+4. rosrun pcl_filter aruco.py
    (Coordinate transformation using ArUco markers and MediaPipe skeleton detection)
 
 5. rosrun pcl_filter check.py
